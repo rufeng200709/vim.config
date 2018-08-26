@@ -12,16 +12,14 @@
 	set cursorline				" 为当前操作行添加下划线
 	
 	"自动调整子窗口边栏宽度
-	nmap    w=  :resize +1<CR>
-	nmap    w-  :resize -1<CR>
-	nmap    w,  :vertical resize -1<CR>
-	nmap    w.  :vertical resize +1<CR>
+	nmap    w=  :resize +1<CR> "窗口下边栏上移1个单位
+	nmap    w-  :resize -1<CR> "窗口下边栏下移1个单位
+	nmap    w.  :vertical resize -1<CR> "窗口侧边栏左移1个单位
+	nmap    w,  :vertical resize +1<CR> "窗口侧边栏左移1个单位
 
-	"导航键定义
-	"leader key define
+	"导航键定义 leader key define
 	let mapleader = ','
-	
-	
+
 	" Easier moving in tabs and windows
     " The lines conflict with the default digraph mapping of <C-K>
     " If you prefer that functionality, add the following to your
@@ -54,17 +52,21 @@
 	Plug 'sgur/vim-textobj-parameter'
 
 	"代码补全
-	Plug 'Valloric/YouCompleteMe'
+	"Plug 'Valloric/YouCompleteMe'
 
-	"显示函数列表
+	"显示函数列表，查找文件
 	Plug 'Yggdroot/LeaderF'
 
+	if executable('gtags')
+		Plug 'majutsushi/tagbar'
+    endif
+	
 	call plug#end()
 "}
 
 "插件配置
 "plug Config {
-	"Config:gen_tags.vim {
+	"gen_tags.vim {
 	if isdirectory(expand("~/.vim/plugged/gen_tags.vim"))
 
 		set csprg=gtags-cscope
@@ -99,7 +101,7 @@
 	endif
 	"}
 
-	"Config:NerdTree {
+	"NerdTree {
         "if isdirectory(expand("~/.vim/plugged/nerdtree"))
 			map <C-e> :NERDTreeMirror<CR>
 			map <C-e> :NERDTreeToggle<CR>
@@ -118,9 +120,14 @@
             let g:nerdtree_tabs_open_on_gui_startup=0
         "endif
     "}
-
 	
-	"Config:asyncrun.vim{
+	"TagBar {
+        if isdirectory(expand("~/.vim/plugged/tagbar/"))
+            nnoremap <silent> <leader>tt :TagbarToggle<CR>
+        endif
+    "}
+	
+	"asyncrun.vim{
 		" 自动打开 quickfix window ，高度为 6
 		let g:asyncrun_open = 6
 
@@ -132,7 +139,7 @@
 
 	"}
 
-	"Config:ale {
+	"ale {
 		let g:ale_linters_explicit = 1
 		let g:ale_completion_delay = 500
 		let g:ale_echo_delay = 20
@@ -148,7 +155,7 @@
 		let g:ale_cpp_cppcheck_options = ''
 	"}
 
-	"Config: YouCompleteMe {
+	"YouCompleteMe {
 		let g:ycm_add_preview_to_completeopt = 0
 		let g:ycm_show_diagnostics_ui = 0
 		let g:ycm_server_log_level = 'info'
@@ -167,7 +174,7 @@
 				   \ }
 	"}
 
-	"Config LeaderF {
+	"LeaderF {
 		let g:Lf_ShortcutF = '<c-p>'
 		let g:Lf_ShortcutB = '<m-n>'
 		noremap <c-n> :LeaderfMru<cr>

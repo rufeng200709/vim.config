@@ -12,8 +12,17 @@
 #### 安装教程
 
 1. 需要提前安装sqlite3,GNU global,
-2. 将.vimrc拷贝到~/目录之下
-3. xxxx
+2. 
+● Vim-plug的获取：
+https://github.com/junegunn/vim-plug 
+
+● Vim-plug的安装：
+
+mkdir -p  ~/.vim/autoload/
+cp plug.vim  ~/.vim/autoload/plug.vim
+
+3. 将.vimrc拷贝到~/目录之下
+4. xxxx
 
 #### 使用说明
 

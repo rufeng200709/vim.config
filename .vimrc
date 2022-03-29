@@ -4,13 +4,24 @@
 	set fileencodings=utf-8,gb18030
 	set background=dark         " Assume a dark background
 	syntax on                   " Syntax highlighting
-	set number					" 显示行号
+	set number		    " 显示行号
 	set mouse=a                 " Automatically enable mouse usage
 	set mousehide               " Hide the mouse cursor while typing
 	set history=1000            " Store a ton of history (default is 20)
 
-	set cursorline				" 为当前操作行添加下划线
-	
+	set cursorline		    " 为当前操作行添加下划线
+
+    "set hlsearch        "high light the search word
+    "set incsearch       "输入关键字时高亮显示
+
+	" add tab space
+	set ts=4
+	set softtabstop=4
+	set shiftwidth=4
+	set expandtab
+	set autoindent
+
+
 	"自动调整子窗口边栏宽度
 	nmap    w=  :resize +1<CR> "窗口下边栏上移1个单位
 	nmap    w-  :resize -1<CR> "窗口下边栏下移1个单位
@@ -60,7 +71,7 @@
 
 	if executable('gtags')
 		Plug 'majutsushi/tagbar'
-    endif
+    	endif
 	
 	call plug#end()
 "}
@@ -105,7 +116,7 @@
 	"vim-gutentags {
 	if isdirectory(expand("~/.vim/plugged/vim-gutentags"))
 	
-		"let $GTAGSLABEL = 'native-pygments'
+		let $GTAGSLABEL = 'native-pygments'
 		"let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 
 		" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
@@ -124,16 +135,15 @@
 		endif
 
 		" 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-		let g:gutentags_cache_dir = expand('~/.cache/tags')
+		let g:gutentags_cache_dir = expand('~/work/.cache/tags')
 
 		" 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
-		"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-		let g:gutentags_ctags_extra_args = ['--fields=+niazS']
+		let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 		let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 		let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 		" 如果使用 universal ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
-		"let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+		let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 		" 禁用 gutentags 自动加载 gtags 数据库的行为
 		let g:gutentags_auto_add_gtags_cscope = 1
@@ -154,28 +164,27 @@
 		noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 
 		" 调试模式开关
-		let g:gutentags_define_advanced_commands = 1
+		"let g:gutentags_define_advanced_commands = 1
 	endif
 	"}
 
 	"NerdTree {
-        "if isdirectory(expand("~/.vim/plugged/nerdtree"))
-			map <C-e> :NERDTreeMirror<CR>
-			map <C-e> :NERDTreeToggle<CR>
-            "map <leader>e :NERDTreeFind<CR>
-            "nmap <leader>nt :NERDTreeFind<CR>
-
-	
+    "if isdirectory(expand("~/.vim/plugged/nerdtree"))
+	    "map <C-e> :NERDTreeMirror<CR>
+	    map <leader>e :NERDTreeMirror<CR>
+	    map <leader>e :NERDTreeToggle<CR>
+        "map <leader>e :NERDTreeFind<CR>
+        "nmap <leader>nt :NERDTreeFind<CR>
 			
-            let NERDTreeShowBookmarks=1
-            let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-            let NERDTreeChDirMode=0
-            let NERDTreeQuitOnOpen=1
-            let NERDTreeMouseMode=2
-            let NERDTreeShowHidden=1
-            let NERDTreeKeepTreeInNewTab=1
-            let g:nerdtree_tabs_open_on_gui_startup=0
-        "endif
+        let NERDTreeShowBookmarks=1
+        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+        let NERDTreeChDirMode=0
+        let NERDTreeQuitOnOpen=0
+        let NERDTreeMouseMode=2
+        let NERDTreeShowHidden=1
+        let NERDTreeKeepTreeInNewTab=1
+        let g:nerdtree_tabs_open_on_gui_startup=0
+    "endif
     "}
 	
 	"TagBar {
@@ -232,12 +241,28 @@
 	"}
 
 	"LeaderF {
-		let g:Lf_ShortcutF = '<c-p>'
-		let g:Lf_ShortcutB = '<m-n>'
-		noremap <c-n> :LeaderfMru<cr>
-		noremap <leader>p :LeaderfFunction!<cr>
-		noremap <m-n> :LeaderfBuffer<cr>
-		noremap <m-m> :LeaderfTag<cr>
+		"let g:Lf_ShortcutF = '<c-p>'
+		"let g:Lf_ShortcutB = '<m-n>'
+		"noremap <c-n> :LeaderfMru<cr>
+		"noremap <leader>p :LeaderfFunction!<cr>
+		"noremap <m-n> :LeaderfBuffer<cr>
+		"noremap <m-m> :LeaderfTag<cr>
+		
+		"文件搜索
+		nnoremap <silent> <Leader>f :Leaderf file<CR>
+		
+		"历史打开过的文件	
+		nnoremap <silent> <Leader>m :Leaderf mru<CR>
+		
+		"Buffer
+		nnoremap <silent> <Leader>b :Leaderf buffer<CR>	
+		
+		"函数搜索（仅当前文件里）
+		nnoremap <silent> <Leader>F :Leaderf function<CR>
+		
+		"模糊搜索，很强大的功能，迅速秒搜	
+		nnoremap <silent> <Leader>rg :Leaderf rg<CR> 
+		
 		let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 		let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']

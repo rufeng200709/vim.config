@@ -228,6 +228,7 @@
 
 	"lightline.vim {
 		if isdirectory(expand("~/.vim/plugged/lightline.vim/"))
+			set laststatus=2
 			let g:lightline = {
 				\ 'colorscheme': 'wombat',
 				\ 'active': {

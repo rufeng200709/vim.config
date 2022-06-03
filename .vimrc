@@ -53,7 +53,8 @@
 	"Plug 'jsfaint/gen_tags.vim' "代码索引，代码跳转
 	Plug 'scrooloose/nerdtree'
 	Plug 'skywind3000/asyncrun.vim'
-	Plug 'w0rp/ale'
+	"Plug 'w0rp/ale'
+	Plug 'itchyny/lightline.vim'
 	Plug 'mhinz/vim-signify'
 
 	"文本对象
@@ -222,6 +223,21 @@
 			let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
 			let g:ale_c_cppcheck_options = ''
 			let g:ale_cpp_cppcheck_options = ''
+		endif
+	"}
+
+	"lightline.vim {
+		if isdirectory(expand("~/.vim/plugged/lightline.vim/"))
+			let g:lightline = {
+				\ 'colorscheme': 'wombat',
+				\ 'active': {
+				\   'left': [ [ 'mode', 'paste' ],
+				\             [ 'readonly', 'filename', 'modified', 'charvaluehex' ] ]
+				\ },
+				\ 'component': {
+				\   'charvaluehex': '0x%B'
+				\ },
+				\ }
 		endif
 	"}
 

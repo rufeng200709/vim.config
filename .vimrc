@@ -118,7 +118,7 @@
 		if isdirectory(expand("~/.vim/plugged/vim-gutentags"))
 		
 			let $GTAGSLABEL = 'native-pygments'
-			"let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
+			let $GTAGSCONF = '/home/ring/.globalrc'
 
 			" gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
 			let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -147,7 +147,7 @@
 			let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 			" 禁用 gutentags 自动加载 gtags 数据库的行为
-			let g:gutentags_auto_add_gtags_cscope = 1
+			let g:gutentags_auto_add_gtags_cscope = 0
 
 			" change focus to quickfix window after search (optional).
 			let g:gutentags_plus_switch = 1

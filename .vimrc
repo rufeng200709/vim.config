@@ -59,11 +59,11 @@
     Plug 'vifm/vifm.vim'
 
     "文本对象
-    Plug 'kana/vim-textobj-user'
-    Plug 'kana/vim-textobj-indent'
-    Plug 'kana/vim-textobj-syntax'
-    Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
-    Plug 'sgur/vim-textobj-parameter'
+    "Plug 'kana/vim-textobj-user'
+    "Plug 'kana/vim-textobj-indent'
+    "Plug 'kana/vim-textobj-syntax'
+    "Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+    "Plug 'sgur/vim-textobj-parameter'
 
     "代码补全
     "Plug 'Valloric/YouCompleteMe'

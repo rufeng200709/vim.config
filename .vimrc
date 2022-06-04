@@ -73,7 +73,7 @@
 
     if executable('gtags')
         Plug 'majutsushi/tagbar'
-        endif
+    endif
     
     call plug#end()
 "}

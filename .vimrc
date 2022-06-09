@@ -56,17 +56,7 @@
     "Plug 'w0rp/ale'
     Plug 'itchyny/lightline.vim'
     Plug 'mhinz/vim-signify'
-    Plug 'vifm/vifm.vim'
-
-    "文本对象
-    "Plug 'kana/vim-textobj-user'
-    "Plug 'kana/vim-textobj-indent'
-    "Plug 'kana/vim-textobj-syntax'
-    "Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
-    "Plug 'sgur/vim-textobj-parameter'
-
-    "代码补全
-    "Plug 'Valloric/YouCompleteMe'
+    "Plug 'vifm/vifm.vim'
 
     "显示函数列表，查找文件
     Plug 'Yggdroot/LeaderF'
@@ -250,27 +240,6 @@
             nnoremap <silent> <leader>sp :SplitVifm<CR>
             nnoremap <silent> <leader>dv :DiffVifm<CR>
             nnoremap <silent> <leader>tv :TabVifm<CR>
-        endif
-    "}
-
-    "YouCompleteMe {
-        if isdirectory(expand("~/.vim/plugged/YouCompleteMe/"))
-            let g:ycm_add_preview_to_completeopt = 0
-            let g:ycm_show_diagnostics_ui = 0
-            let g:ycm_server_log_level = 'info'
-            let g:ycm_min_num_identifier_candidate_chars = 2
-            let g:ycm_collect_identifiers_from_comments_and_strings = 1
-            let g:ycm_complete_in_strings=1
-            let g:ycm_key_invoke_completion = '<c-z>'
-            let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-            set completeopt=menu,menuone
-
-            noremap <c-z> <NOP>
-
-            let g:ycm_semantic_triggers =  {
-                    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                    \ 'cs,lua,javascript': ['re!\w{2}'],
-                    \ }
         endif
     "}
 

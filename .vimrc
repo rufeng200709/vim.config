@@ -50,7 +50,6 @@
 
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'skywind3000/gutentags_plus'
-    "Plug 'jsfaint/gen_tags.vim' "代码索引，代码跳转
     Plug 'scrooloose/nerdtree'
     Plug 'skywind3000/asyncrun.vim'
     "Plug 'w0rp/ale'
@@ -70,38 +69,77 @@
 
 "插件配置
 "plug Config {
-    "gen_tags.vim {
-        if isdirectory(expand("~/.vim/plugged/gen_tags.vim"))
 
-            set csprg=gtags-cscope
-            set csto=0
-            set cst
-            set nocsverb
+    "LeaderF {
+        if isdirectory(expand("~/.vim/plugged/LeaderF/"))
+            "let g:Lf_ShortcutF = '<c-p>'
+            "let g:Lf_ShortcutB = '<m-n>'
+            "noremap <c-n> :LeaderfMru<cr>
+            "noremap <leader>p :LeaderfFunction!<cr>
+            "noremap <m-n> :LeaderfBuffer<cr>
+            "noremap <m-m> :LeaderfTag<cr>
 
-            " add any database in current directory
-            "if filereadable("cscope.out")
-            "  cs add cscope.out
-            " else add database pointed to by environment
-            "elseif $CSCOPE_DB != ""
-            "  cs add $CSCOPE_DB
-            "endif
-
-            if filereadable("GTAGS")
-            cs add GTAGS
-            elseif $GTAGS_DB != ""
-            cs add $GTAGS_DB
-            endif
-
-            set csverb
+            "Leaderf 默认指令
+            "文件搜索
+            nnoremap <silent> <Leader>f :Leaderf file<CR>
             
-            nmap <leader>cs :cs find s <C-R>=expand("<cword>")<CR><CR>
-            nmap <leader>sg :cs find g <C-R>=expand("<cword>")<CR><CR>
-            nmap <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR>
-            nmap <leader>st :cs find t <C-R>=expand("<cword>")<CR><CR>
-            nmap <leader>se :cs find e <C-R>=expand("<cword>")<CR><CR>
-            nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-            nmap <leader>si :cs find i <C-R>=expand("<cfile>")<CR><CR>
-            nmap <leader>sd :cs find d <C-R>=expand("<cword>")<CR><CR>
+            "历史打开过的文件    
+            nnoremap <silent> <Leader>fm :Leaderf mru<CR>
+            
+            "Buffer
+            nnoremap <silent> <Leader>fb :Leaderf buffer<CR>    
+            
+            "函数搜索（仅当前文件里）
+            nnoremap <silent> <Leader>ff :Leaderf function<CR>
+
+            "返回上次执行的Leaderf命令的执行结果页面
+            nnoremap <leader>fl :<C-U><C-R>=printf("Leaderf! --recall %s", "")<CR><CR>
+
+
+            "Leaderf rg相关指令
+            "模糊搜索，搜索所有文件,需要手动输入关键词    
+            nnoremap <silent> <Leader>fr :Leaderf rg<CR> 
+
+            "模糊搜索，只在c文件中搜索当前光标处的word
+            "nnoremap <silent> <Leader>frc :Leaderf rg -t c<CR> 
+            nnoremap <silent> <Leader>frc :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.c", expand("<cword>"))<CR><CR>
+
+            "模糊搜索，只在h文件中搜索当前光标处的word
+            "nnoremap <silent> <Leader>frh :Leaderf rg -t h<CR> 
+            nnoremap <silent> <Leader>frh :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.h", expand("<cword>"))<CR><CR>
+
+            "模糊搜索，只在h文件和c文件中搜索当前光标处的word
+            nnoremap <silent> <Leader>fra :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,c}", expand("<cword>"))<CR><CR>
+
+            "模糊搜索，只在设备树文件中搜索当前光标处的word
+            nnoremap <silent> <Leader>frd :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{dts,dtsi}", expand("<cword>"))<CR><CR>
+
+            "模糊搜索，显示前一次搜索结果的页面
+            nnoremap <leader>frl :<C-U><C-R>=printf("Leaderf! rg --recall %s", "")<CR><CR>
+
+
+            "Leaderf gtags相关指令
+            nnoremap <leader>fgr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+            nnoremap <leader>fgd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+            nnoremap <leader>fgo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+            nnoremap <leader>fgn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+            nnoremap <leader>fgp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+
+            let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+            let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+            let g:Lf_WorkingDirectoryMode = 'Ac'
+            let g:Lf_WindowHeight = 0.30
+            let g:Lf_CacheDirectory = expand('~/.vim/cache')
+            let g:Lf_ShowRelativePath = 0
+            let g:Lf_HideHelp = 1
+            let g:Lf_StlColorscheme = 'powerline'
+            let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+            
+            let g:Lf_GtagsAutoGenerate = 0
+            let g:Lf_GtagsGutentags = 1
+            let g:gutentags_cache_dir = expand(g:Lf_CacheDirectory.'/LeaderF/gtags')
+
         endif
     "}
 
@@ -109,7 +147,7 @@
         if isdirectory(expand("~/.vim/plugged/vim-gutentags"))
         
             let $GTAGSLABEL = 'native-pygments'
-            let $GTAGSCONF = '/home/ring/.globalrc'
+            let $GTAGSCONF = $HOME . '/.globalrc'
 
             " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
             let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -119,15 +157,19 @@
 
             " 同时开启 ctags 和 gtags 支持：
             let g:gutentags_modules = []
-            if executable('ctags')
-                let g:gutentags_modules += ['ctags']
-            endif
+            "if executable('ctags')
+            "    let g:gutentags_modules += ['ctags']
+            "endif
             if executable('gtags-cscope') && executable('gtags')
                 let g:gutentags_modules += ['gtags_cscope']
             endif
 
+
+            "为了和Leaderf共用同一个gtags库，将该变量的设置放在g:Lf_CacheDirectory定义的后面
+
             " 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-            let g:gutentags_cache_dir = expand('~/.cache/tags')
+            "let g:gutentags_cache_dir = expand('~/.cache/tags')
+
 
             " 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
             let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
@@ -243,40 +285,4 @@
         endif
     "}
 
-    "LeaderF {
-        if isdirectory(expand("~/.vim/plugged/LeaderF/"))
-            "let g:Lf_ShortcutF = '<c-p>'
-            "let g:Lf_ShortcutB = '<m-n>'
-            "noremap <c-n> :LeaderfMru<cr>
-            "noremap <leader>p :LeaderfFunction!<cr>
-            "noremap <m-n> :LeaderfBuffer<cr>
-            "noremap <m-m> :LeaderfTag<cr>
-            
-            "文件搜索
-            nnoremap <silent> <Leader>f :Leaderf file<CR>
-            
-            "历史打开过的文件    
-            nnoremap <silent> <Leader>m :Leaderf mru<CR>
-            
-            "Buffer
-            nnoremap <silent> <Leader>b :Leaderf buffer<CR>    
-            
-            "函数搜索（仅当前文件里）
-            nnoremap <silent> <Leader>F :Leaderf function<CR>
-            
-            "模糊搜索，很强大的功能，迅速秒搜    
-            nnoremap <silent> <Leader>rg :Leaderf rg<CR> 
-            
-            let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-
-            let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-            let g:Lf_WorkingDirectoryMode = 'Ac'
-            let g:Lf_WindowHeight = 0.30
-            let g:Lf_CacheDirectory = expand('~/.vim/cache')
-            let g:Lf_ShowRelativePath = 0
-            let g:Lf_HideHelp = 1
-            let g:Lf_StlColorscheme = 'powerline'
-            let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-        endif
-    "}
 "}

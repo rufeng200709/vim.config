@@ -1,33 +1,33 @@
 # Vim配置库
 
-#### 项目介绍
-建立并维护Vim配置库
+#### 项目介绍 
+建立并维护Vim配置库 
 
 #### 软件架构
 软件架构说明
-1.采用vim-plug作为插件管理器,优点是异步安装和更新插件，不必再低效地一个个按顺序来
-2.选取当前较为高效的插件
+1.采用vim-plug作为插件管理器,优点是异步安装和更新插件，不必再低效地一个个按顺序来  
+2.选取当前较为高效的插件  
 
 
-#### 安装教程
-
-1. 需要提前安装GNU global等依赖软件：
-   sudo apt install global
-   cp /usr/local/share/gtags/gtags.conf ~/.globalrc
-   pip install pygments
-   sudo apt install universal-ctags
+#### 安装教程  
+  
+1. 需要提前安装GNU global等依赖软件：  
+   sudo apt install global  
+   cp /usr/local/share/gtags/gtags.conf ~/.globalrc  
+   pip install pygments  
+   sudo apt install universal-ctags  
 2. 
-● Vim-plug的获取：
-https://github.com/junegunn/vim-plug 
+● Vim-plug的获取：  
+https://github.com/junegunn/vim-plug   
 
-● Vim-plug的安装：
-mkdir -p  ~/.vim/autoload/
-cp plug.vim  ~/.vim/autoload/plug.vim
+● Vim-plug的安装：  
+mkdir -p  ~/.vim/autoload/  
+cp plug.vim  ~/.vim/autoload/plug.vim  
 
-3. 将.vimrc拷贝到~/目录之下
-4. xxxx
+3. 将.vimrc拷贝到~/目录之下  
+4. xxxx  
 
-#### 使用说明
+#### 使用说明  
 
 1. xxxx
 2. xxxx

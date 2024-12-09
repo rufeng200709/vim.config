@@ -11,13 +11,16 @@
 
 #### 安装教程
 
-1. 需要提前安装sqlite3,GNU global,
+1. 需要提前安装GNU global等依赖软件：
+   sudo apt install global
+   cp /usr/local/share/gtags/gtags.conf ~/.globalrc
+   pip install pygments
+   sudo apt install universal-ctags
 2. 
 ● Vim-plug的获取：
 https://github.com/junegunn/vim-plug 
 
 ● Vim-plug的安装：
-
 mkdir -p  ~/.vim/autoload/
 cp plug.vim  ~/.vim/autoload/plug.vim
 
